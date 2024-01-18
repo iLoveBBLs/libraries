@@ -66,16 +66,22 @@ tab1:Textbox("Morph into userid:",true, function(userid)
 		ConnectionEvent:FireServer(315,data,true)
 	end
 end)
-tab1:Button("Unlimited Outfits", function(b)
+tab1:Toggle("Silent Aim",false, function(b)
 	if b then
 		Constants.STATS.MAXAvatarEditorCustomOutfits = 999999
 	else
 		Constants.STATS.MAXAvatarEditorCustomOutfits = 3
 	end
-lib:Notification("Notification", "Saved Successfully", "Okay!")
 end)
-
 -- END OF TAB1
+
+tab2:Toggle("Silent Aim",false, function(b)
+	if b then
+		Constants.STATS.FISHCastObjectMinDistanceToCatch = 9999999
+	else
+		Constants.STATS.FISHCastObjectMinDistanceToCatch = 50
+	end
+end)
 
 tab2:Button("Silent Aim", function()
 lib:Notification("Notification", "Hello!", "Hi!")
