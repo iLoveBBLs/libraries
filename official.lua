@@ -1,4 +1,3 @@
--- VARIABLES NEEDED
 local function service(...) return game:GetService(...) end
 local Players = service("Players")
 local MarketplaceService = service("MarketplaceService")
@@ -13,15 +12,9 @@ end
 local function joinserver(instid)
 	return Connection:InvokeServer(400,instid)
 end
--- END OF VARIABLES
-
--- GUI VARIABLES
 local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120,s 224), Enum.KeyCode.RightControl)
 local tab1 = win:Tab("Avatar")
-local tab2 = win:Tab("Fishing")
-local tab3 = win:Tab("Servers")
--- END OF GUI VARIABLES
 local function colorToTable(clr) return {tostring(clr.R*255),tostring(clr.G*255),tostring(clr.B*255)} end
 local function ExtractData(humdes)
 	local ava = {}
@@ -73,5 +66,3 @@ tab1:Toggle("Unlimited Outfits",false, function(b)
 		Constants.STATS.MAXAvatarEditorCustomOutfits = 3
 	end
 end)
-
--- END OF TAB1
