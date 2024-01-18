@@ -56,6 +56,43 @@ local function ExtractData(humdes)
 	return ava
 end
 
+tab0:Toggle("Spam Teleport Notification All",false, function(bool)
+	if bool then
+		if notifloop then
+			notifloop:Disconnect()
+			notifloop = nil
+		end
+		notifloop = service("RunService").Heartbeat:Connect(function()
+			if os.time()%2 == 0 then
+				for _, player in pairs(Players:GetPlayers()) do
+					Connection:InvokeServer(154,player.UserId,{})
+				end
+			end
+		end)
+	else
+		notifloop:Disconnect()
+		notifloop = nil
+	end
+end)
+tab0:Toggle("Spam Ballons",false, function(bool)
+	if bool then
+		if notifloop then
+			notifloop:Disconnect()
+			notifloop = nil
+		end
+		notifloop = service("RunService").Heartbeat:Connect(function()
+			if os.time()%2 == 0 then
+				for _, player in pairs(Players:GetPlayers()) do
+					Connection:InvokeServer(154,player.UserId,{})
+				end
+			end
+		end)
+	else
+		notifloop:Disconnect()
+		notifloop = nil
+	end
+end)
+-- END OF TAB0
 tab1:Textbox("Morph into user:",true, function(username)
 	if username and Players:GetUserIdFromNameAsync(username) then
 		local data = ExtractData(Players:GetHumanoidDescriptionFromUserId(Players:GetUserIdFromNameAsync(username)))
@@ -113,17 +150,7 @@ tab3:Button("Open Server List", function()
 	local serverbrowsermodule = require(game.Players.LocalPlayer.PlayerGui:WaitForChild("ServerBrowserGui"):WaitForChild("ServerBrowserGUI"))
 	serverbrowsermodule.Open()
 end)
-tab0:Textbox("Equip Avatar Item:",true, function(assetid)
-	assetid = tonumber(assetid)
-	if assetid then
-	local info = MarketplaceService:GetProductInfo(assetid)
-	local data = Connection:InvokeServer(Constants.AE_REQUEST_AE_DATA)
-	local wearing = data.PlayerCurrentTemporaryOutfit or data.PlayerCurrentlyWearing
-		wearing.HeadAccessory = AddAccessoryString(wearing.HeadAccessory,assetid)
-		end
-			ConnectionEvent:FireServer(315,wearing,true)
-	end
-end)
+
 --[[
 tab:Button("Button", function()
 lib:Notification("Notification", "Hello!", "Hi!")
