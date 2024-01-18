@@ -1,20 +1,3 @@
-local function service(...) return game:GetService(...) end
-local Players = service("Players")
-local MarketplaceService = service("MarketplaceService")
-local ReplicatedStorage = service("ReplicatedStorage")
-local HttpService = service("HttpService")
-local Constants = require(ReplicatedStorage:WaitForChild("Constants"))
-local Connection = ReplicatedStorage:WaitForChild("Connection")
-local ConnectionEvent = ReplicatedStorage:WaitForChild("ConnectionEvent")
-
-local function getservers()
-	return Connection:InvokeServer(399)
-end
-
-local function joinserver(instid)
-	return Connection:InvokeServer(400,instid)
-end
-
 local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120,s 224), Enum.KeyCode.RightControl)
 local tab1 = win:Tab("Avatar")
