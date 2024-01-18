@@ -1,50 +1,39 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/IreXion-UI-Library/main/IreXion%20UI%20Library"))()
+local Link = loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostDuckyy/Ui-Librarys/main/Playstation%20Ui%20Library/Source'))()
 
-local Gui = Library:AddGui({
-Title = {"IreXion", "UI Library"},
-ThemeColor = Color3.fromRGB(0, 255, 0),
-ToggleKey = Enum.KeyCode.RightShift,
-})
+local Win = Link:CreateWindow('Name','Yeah Info') -- :CreateWindow(Title,Info) Note: info no space
 
-local Tab = Gui:AddTab("Tab")
+local Tab = Win:addPage('Tab', 2, true, 6) -- :addPage(Title, Scoll Size, Visible, elementspacing)
+-- Note: Dont have update function
 
-local Category = Tab:AddCategory("Category")
 
-local Button = Category:AddButton("Button", function()
-print("Button Pressed")
+-- Label
+Tab:addLabel('This a Label', 'Label info') -- :addLabel(Title, Info)
+
+-- Button
+Tab:addButton('This a button', function() -- :addButton(Title, callback)
+    print('Clicked Button')
 end)
 
-local Toggle = Category:AddToggle("Toggle", false, function(toggle)
-print(toggle)
+-- Toggles
+Tab:addToggle('Toggle', function(value) -- :addToggle(Title, callback)
+    if value then -- if true then
+        print('True') -- print true
+    else -- else false
+        print('False') -- print false
+    end
 end)
 
-local Box = Category:AddBox("Box", function(str)
-print(str)
+-- Slider
+Tab:addSlider('Slider', 1,100, function(value) -- :addSlider(Title, min, max, callback)
+    print(value)
 end)
 
-local Label = Category:AddLabel("Label")
-
-local DualLabel = Category:AddDualLabel({"Label1", "Label2"})
-
-local Slider = Category:AddSlider("Slider", 1, 100, 50, function(val)
-print("Slider Value:", val)
+-- TextBox
+Tab:addTextBox('Textbox', 'Textbox Info', function(text) -- :addTextBox(Title, Info)
+    print(text)
 end)
 
-local Dropdown = Category:AddDropdown("Dropdown", {
-"Item 1",
-"Item 2",
-"Item 3",
-"Item 4",
-"Item 5",
-"Item 6",
-"Item 7",
-"Item 8",
-"Item 9",
-"Item 10",
-}, function(name)
-print(name)
-end)
-
-local Bind = Category:AddBind("Bind", Enum.KeyCode.RightShift, function()
-print("Bind Pressed")
+-- Dropdown
+Tab:addDropdown('This is DropDown', {'1', '2', '3', '4', '5'}, 4, function(options) -- :addDropdown(Title, {'List', 'Yeah'}, Scroll Size, callback)
+    print(options)
 end)
