@@ -18,7 +18,6 @@ end
 -- GUI VARIABLES
 local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120,s 224), Enum.KeyCode.RightControl)
-local tab0 = win:Tab("Items")
 local tab1 = win:Tab("Avatar")
 local tab2 = win:Tab("Fishing")
 local tab3 = win:Tab("Servers")
@@ -55,7 +54,6 @@ local function ExtractData(humdes)
 	ava.AccessoryBlob = layered
 	return ava
 end
--- END OF TAB0
 tab1:Textbox("Morph into user:",true, function(username)
 	if username and Players:GetUserIdFromNameAsync(username) then
 		local data = ExtractData(Players:GetHumanoidDescriptionFromUserId(Players:GetUserIdFromNameAsync(username)))
