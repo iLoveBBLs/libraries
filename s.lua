@@ -91,14 +91,26 @@ tab2:Toggle("Unlimited Bucket Size",false, function(b)
 		Constants.STATS.FISHMaxAllowedInBucket = 20
 	end
 end)
-tab3:Dropdown("Dropdown",{"Join Most Populated Server","Join Least Populated Server","Join Random Server","Open Server List"}, function(jmps,jlps,jrs,osl)
-		if jmps then
-		        local server = getservers()[1]
-			joinserver(server.InstanceId)
-		elseif jlps then
-			local servers = getservers()
-	                local server = servers[#servers]
-	                joinserver(server.InstanceId)
+tab3:Button("Join Most Populated Server", function()
+lib:Notification("Notification", "Joining Most Populated Server", "Okay!")
+	local server = getservers()[1]
+	joinserver(server.InstanceId)
+end)
+tab3:Button("Join Least Populated Server", function()
+lib:Notification("Notification", "Joining Least Populated Server", "Okay!")
+	local servers = getservers()
+	local server = servers[#servers]
+	joinserver(server.InstanceId)
+end)
+tab3:Button("Join Random Server", function()
+lib:Notification("Notification", "Joining Random Server", "Okay!")
+	local servers = getservers()
+	local server = servers[math.random(1, #servers)]
+	joinserver(server.InstanceId)
+end)
+tab3:Button("Open Server List", function()
+	local serverbrowsermodule = require(game.Players.LocalPlayer.PlayerGui:WaitForChild("ServerBrowserGui"):WaitForChild("ServerBrowserGUI"))
+	serverbrowsermodule.Open()
 end)
 --[[
 tab:Button("Button", function()
