@@ -1,92 +1,41 @@
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/forumsLib/main/source.lua"))()
-local Forums = Library.new("robloxscripts.com")
+local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 
-local preview = Forums:NewSection("Preview")
-local preview1 = Forums:NewSection("Function Preview")
+local win = lib:Window("PREVIEW",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
 
-preview:NewButton("Button Example", function()
-print("join   now!")
-end)
-preview:NewToggle("Toggle Example", function(state)
-print("Toggle: "..state)
-end)
-preview:NewTextBox("Box Example", function(text)
-print(text)
-end)
-preview:NewSlider("Slider Example", 0, 400, function(value)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
-end)
-preview:NewKeybind("Key Example", Enum.KeyCode.E, function()
-Forums:UIMinimize()
-end)
-local list = {
-    "Option 1",
-    "Option 2",
-    "Option 3",
-}
-preview:NewDropdown("Dropdown Example", list, function(item)
-   
+local tab = win:Tab("Tab 1")
+
+tab:Button("Button", function()
+lib:Notification("Notification", "Hello!", "Hi!")
 end)
 
-preview1:Seperator()
-
-local btn = preview1:NewButton("This Button Will Update", function()
-    print("Button")
-end)
-preview1:NewButton("Update Button Above!", function()
-    btn:Update("Wow, It Updated!!")
+tab:Toggle("Toggle",false, function(t)
+print(t)
 end)
 
-preview1:Seperator()
-getgenv().stt = false
-local toggle = preview1:NewToggle("Status: ", function(status)
-    getgenv().stt = status
-end)
-coroutine.wrap(function()
-    while wait() do
-        toggle:Update("Status: "..tostring(getgenv().stt))
-    end
-end)()
-preview1:Seperator()
-
-getgenv().newTxt = "Update This Text"
-local box = preview1:NewTextBox("Update This Text", function(newText)
-    getgenv().newTxt = newText
-end)
-coroutine.wrap(function()
-    while wait() do
-        box:Update(tostring(getgenv().newTxt))
-    end
-end)()
-
-preview1:Seperator()
-
-local key = preview1:NewKeybind("This Key Will Update", Enum.KeyCode.E, function()
-Forums:UIMinimize()
-end)
-preview1:NewButton("Update to Q", function()
-    key:Update(Enum.KeyCode.Q)
-end)
-preview1:NewButton("Update to F", function()
-    key:Update(Enum.KeyCode.F)
-end)
-preview1:NewButton("Update to O", function()
-    key:Update(Enum.KeyCode.O)
+tab:Slider("Slider",0,100,30, function(t)
+print(t)
 end)
 
-preview1:Seperator()
-
-local drop = preview1:NewDropdown("Player List", {"Update To Get Players"}, function(item)
-   
-end)
-local plrTable = {}
-preview1:NewButton("Update Player List", function()
-    for i,v in pairs(game.Players:GetChildren()) do
-        if v ~= game.Players.LocalPlayer then
-            table.insert(plrTable, v.Name)
-        end
-    end
-    drop:Refresh(plrTable)
+tab:Dropdown("Dropdown",{"Option 1","Option 2","Option 3","Option 4","Option 5"}, function(t)
+print(t)
 end)
 
-preview1:Seperator()
+tab:Colorpicker("Colorpicker",Color3.fromRGB(255,0,0), function(t)
+print(t)
+end)
+
+tab:Textbox("Textbox",true, function(t)
+print(t)
+end)
+
+tab:Bind("Bind",Enum.KeyCode.RightShift, function()
+print("Pressed!")
+end)
+
+tab:Label("Label")
+
+local changeclr = win:Tab("Change UI Color")
+
+changeclr:Colorpicker("Change UI Color",Color3.fromRGB(44, 120, 224), function(t)
+lib:ChangePresetColor(Color3.fromRGB(t.R * 255, t.G * 255, t.B * 255))
+end)
