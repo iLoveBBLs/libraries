@@ -17,7 +17,8 @@ end
 
 -- GUI VARIABLES
 local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
-local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
+local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120,s 224), Enum.KeyCode.RightControl)
+local tab0 = win:Tab("Items")
 local tab1 = win:Tab("Avatar")
 local tab2 = win:Tab("Fishing")
 local tab3 = win:Tab("Servers")
@@ -111,6 +112,39 @@ end)
 tab3:Button("Open Server List", function()
 	local serverbrowsermodule = require(game.Players.LocalPlayer.PlayerGui:WaitForChild("ServerBrowserGui"):WaitForChild("ServerBrowserGUI"))
 	serverbrowsermodule.Open()
+end)
+tab0:Textbox("Equip Avatar Item:",true, function(assetid)
+	assetid = tonumber(assetid)
+	if assetid then
+	local info = MarketplaceService:GetProductInfo(assetid)
+	local assettype = info.AssetTypeId
+	local data = Connection:InvokeServer(Constants.AE_REQUEST_AE_DATA)
+	local wearing = data.PlayerCurrentTemporaryOutfit or data.PlayerCurrentlyWearing
+	if assettype == 8 then
+		wearing.HeadAccessory = AddAccessoryString(wearing.HeadAccessory,assetid)
+	elseif assettype == 41 then
+		wearing.HairAccessory = AddAccessoryString(wearing.HairAccessory,assetid)
+	elseif assettype == 42 then
+		wearing.FaceAccessory = AddAccessoryString(wearing.FaceAccessory,assetid)
+	elseif assettype == 43 then
+		wearing.NeckAccessory = AddAccessoryString(wearing.NeckAccessory,assetid)
+	elseif assettype == 44 then
+		wearing.ShouldersAccessory = AddAccessoryString(wearing.ShoulderAccessory,assetid)
+	elseif assettype == 45 then
+		wearing.FrontAccessory = AddAccessoryString(wearing.FrontAccessory,assetid)
+	elseif assettype == 46 then
+		wearing.BackAccessory = AddAccessoryString(wearing.BackAccessory,assetid)
+	elseif assettype == 47 then
+		wearing.WaistAccessory = AddAccessoryString(wearing.WaistAccessory,assetid)
+	elseif assettype == 11 then
+		wearing.Shirt = assetid
+	elseif assettype == 12 then
+		wearing.Pants = assetid
+	elseif assettype == 2 then
+		wearing.GraphicTShirt = assetid
+	end
+	ConnectionEvent:FireServer(315,wearing,true)
+end
 end)
 --[[
 tab:Button("Button", function()
