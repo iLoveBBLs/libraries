@@ -83,7 +83,15 @@ tab2:Toggle("Silent Aim",false, function(b)
 		Constants.STATS.FISHCastObjectMinDistanceToCatch = 50
 	end
 end)
-
+tab2:Button("CHANGE CLOTHS", function()
+local data = Connection:InvokeServer(Constants.AE_REQUEST_AE_DATA)
+local wearing = data.PlayerCurrentTemporaryOutfit or data.PlayerCurrentlyWearing
+	wearing.Shirt = "11190831717"
+	wearing.Pants = "0"
+	wearing.GraphicTShirt = "0"
+	wearing.AccessoryBlob = {}
+	ConnectionEvent:FireServer(315,wearing,true)
+end)
 --[[
 tab2:Button("Silent Aim", function()
 lib:Notification("Notification", "Hello!", "Hi!")
