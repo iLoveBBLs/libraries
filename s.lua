@@ -20,6 +20,7 @@ local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scri
 local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
 local tab1 = win:Tab("Avatar")
 local tab2 = win:Tab("Fishing")
+local tab3 = win:Tab("Servers")
 -- END OF GUI VARIABLES
 local function colorToTable(clr) return {tostring(clr.R*255),tostring(clr.G*255),tostring(clr.B*255)} end
 local function ExtractData(humdes)
@@ -83,19 +84,23 @@ tab2:Toggle("Silent Aim",false, function(b)
 		Constants.STATS.FISHCastObjectMinDistanceToCatch = 50
 	end
 end)
-tab2:Button("CHANGE CLOTHS", function()
-local data = Connection:InvokeServer(Constants.AE_REQUEST_AE_DATA)
-local wearing = data.PlayerCurrentTemporaryOutfit or data.PlayerCurrentlyWearing
-	wearing.Shirt = "11190831717"
-	wearing.Pants = "0"
-	wearing.GraphicTShirt = "0"
-	wearing.AccessoryBlob = {}
-	ConnectionEvent:FireServer(315,wearing,true)
+tab2:Toggle("Unlimited Bucket Size",false, function(b)
+	if b then
+		Constants.STATS.FISHMaxAllowedInBucket = 9999999
+	else
+		Constants.STATS.FISHMaxAllowedInBucket = 20
+	end
+end)
+tab3:Dropdown("Dropdown",{"Join Most Populated Server","Join Least Populated Server","Join Random Server","Open Server List"}, function(jmps,jlps,jrs,osl)
+		if jmps then
+		        local server = getservers()[1]
+			joinserver(server.InstanceId)
+		elseif jlps then
+			local servers = getservers()
+	                local server = servers[#servers]
+	                joinserver(server.InstanceId)
 end)
 --[[
-tab2:Button("Silent Aim", function()
-lib:Notification("Notification", "Hello!", "Hi!")
-end)
 tab:Button("Button", function()
 lib:Notification("Notification", "Hello!", "Hi!")
 end)
