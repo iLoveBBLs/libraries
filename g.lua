@@ -55,43 +55,6 @@ local function ExtractData(humdes)
 	ava.AccessoryBlob = layered
 	return ava
 end
-
-tab0:Toggle("Spam Teleport Notification All",false, function(bool)
-	if bool then
-		if notifloop then
-			notifloop:Disconnect()
-			notifloop = nil
-		end
-		notifloop = service("RunService").Heartbeat:Connect(function()
-			if os.time()%2 == 0 then
-				for _, player in pairs(Players:GetPlayers()) do
-					Connection:InvokeServer(154,player.UserId,{})
-				end
-			end
-		end)
-	else
-		notifloop:Disconnect()
-		notifloop = nil
-	end
-end)
-tab0:Toggle("Spam Ballons",false, function(bool)
-	if bool then
-		if notifloop then
-			notifloop:Disconnect()
-			notifloop = nil
-		end
-		notifloop = service("RunService").Heartbeat:Connect(function()
-			if os.time()%2 == 0 then
-				for _, player in pairs(Players:GetPlayers()) do
-					Connection:InvokeServer(154,player.UserId,{})
-				end
-			end
-		end)
-	else
-		notifloop:Disconnect()
-		notifloop = nil
-	end
-end)
 -- END OF TAB0
 tab1:Textbox("Morph into user:",true, function(username)
 	if username and Players:GetUserIdFromNameAsync(username) then
