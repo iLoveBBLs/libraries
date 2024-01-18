@@ -18,11 +18,10 @@ end
 -- GUI VARIABLES
 local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
 local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
-local tab = win:Tab("Avatar")
+local tab1 = win:Tab("Avatar")
+local tab2 = win:Tab("Fishing")
 -- END OF GUI VARIABLES
-
 local function colorToTable(clr) return {tostring(clr.R*255),tostring(clr.G*255),tostring(clr.B*255)} end
-
 local function ExtractData(humdes)
 	local ava = {}
 	for _,v in pairs({"WidthScale", "HeadScale","HeightScale","DepthScale","BodyTypeScale","ProportionScale"}) do
@@ -55,13 +54,32 @@ local function ExtractData(humdes)
 	return ava
 end
 
-tab:Textbox("Morph into user:",true, function(username)
+tab1:Textbox("Morph into user:",true, function(username)
 	if username and Players:GetUserIdFromNameAsync(username) then
 		local data = ExtractData(Players:GetHumanoidDescriptionFromUserId(Players:GetUserIdFromNameAsync(username)))
 		ConnectionEvent:FireServer(315,data,true)
 	end
 end)
+tab1:Textbox("Morph into userid:",true, function(userid)
+	if userid and tonumber(userid) and Players:GetHumanoidDescriptionFromUserId(tonumber(userid)) then
+		local data = ExtractData(Players:GetHumanoidDescriptionFromUserId(tonumber(userid)))
+		ConnectionEvent:FireServer(315,data,true)
+	end
+end)
+tab1:Button("Unlimited Outfits", function(b)
+	if b then
+		Constants.STATS.MAXAvatarEditorCustomOutfits = 999999
+	else
+		Constants.STATS.MAXAvatarEditorCustomOutfits = 3
+	end
+lib:Notification("Notification", "Saved Successfully", "Okay!")
+end)
 
+-- END OF TAB1
+
+tab2:Button("Silent Aim", function()
+lib:Notification("Notification", "Hello!", "Hi!")
+end)
 tab:Button("Button", function()
 lib:Notification("Notification", "Hello!", "Hi!")
 end)
