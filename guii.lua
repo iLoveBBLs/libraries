@@ -66,13 +66,14 @@ tab1:Textbox("Morph into userid:",true, function(userid)
 		ConnectionEvent:FireServer(315,data,true)
 	end
 end)
-tab1:Toggle("Silent Aim",false, function(b)
+tab1:Toggle("Unlimited Outfits",false, function(b)
 	if b then
 		Constants.STATS.MAXAvatarEditorCustomOutfits = 999999
 	else
 		Constants.STATS.MAXAvatarEditorCustomOutfits = 3
 	end
 end)
+
 -- END OF TAB1
 
 tab2:Toggle("Silent Aim",false, function(b)
@@ -83,6 +84,7 @@ tab2:Toggle("Silent Aim",false, function(b)
 	end
 end)
 
+--[[
 tab2:Button("Silent Aim", function()
 lib:Notification("Notification", "Hello!", "Hi!")
 end)
@@ -101,3 +103,4 @@ end)
 tab:Textbox("Textbox",true, function(t)
 print(t)
 end)
+]]--
