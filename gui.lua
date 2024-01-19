@@ -15,11 +15,9 @@ local function joinserver(instid)
 end
 -- END OF VARIABLES
 
--- GUI VARIABLES
-local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
-local win = lib:Window("MEEPCITY",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
-local tab = win:Tab("Avatar")
--- END OF GUI VARIABLES
+local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+local LibraryWindow = Library:NewWindow("Meepcity")
+local Avatar = PhantomForcesWindow:NewSection("Avatar")
 
 local function colorToTable(clr) return {tostring(clr.R*255),tostring(clr.G*255),tostring(clr.B*255)} end
 
@@ -54,26 +52,9 @@ local function ExtractData(humdes)
 	ava.AccessoryBlob = layered
 	return ava
 end
-
-tab:Textbox("Morph into user:",true, function(username)
+LibraryWindow:CreateTextbox("Username", function(username)
 	if username and Players:GetUserIdFromNameAsync(username) then
 		local data = ExtractData(Players:GetHumanoidDescriptionFromUserId(Players:GetUserIdFromNameAsync(username)))
 		ConnectionEvent:FireServer(315,data,true)
 	end
-end)
-
-tab:Button("Button", function()
-lib:Notification("Notification", "Hello!", "Hi!")
-end)
-
-tab:Toggle("Toggle",false, function(t)
-print(t)
-end)
-
-tab:Dropdown("Dropdown",{"Option 1","Option 2","Option 3","Option 4","Option 5"}, function(t)
-print(t)
-end)
-
-tab:Textbox("Textbox",true, function(t)
-print(t)
 end)
